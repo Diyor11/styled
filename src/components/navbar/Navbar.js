@@ -1,10 +1,22 @@
 import React from 'react'
+import { Nav, LeftLinks, NavLinks, RightLinks } from './navbar.elements'
+import ViewListIcon from '@mui/icons-material/ViewList'
 
 const Navbar = () => {
     return (
-        <>
-            <h1>navbar</h1>
-        </>
+        <Nav>
+            <LeftLinks>
+                <NavLinks to='/about'>about</NavLinks>
+                <NavLinks to='/store'>store</NavLinks>
+            </LeftLinks>
+            <RightLinks>
+                <NavLinks to='/gmail'>gmail</NavLinks>
+                <NavLinks to='/images'>images</NavLinks>
+                <NavLinks to='/'>
+                    <ViewListIcon />
+                </NavLinks>
+            </RightLinks>
+        </Nav>
     )
 }
 
