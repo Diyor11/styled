@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import aboutBg from '../../assets/bg.jpg'
 import imgText from '../../assets/img1.png'
 
@@ -18,17 +18,6 @@ export const Header = styled.div`
     background: linear-gradient(to right, #00091F, #00091F);
     position: relative;
     overflow: hidden;
-`
-export const Services = styled.div`
-    height: 100vh;
-    scroll-snap-align: start;
-    background-color: blue;
-`
-
-export const Contact = styled.div`
-    height: 100vh;
-    scroll-snap-align: start;
-    background-color: green;
 `
 
 const animate = keyframes`
@@ -163,7 +152,10 @@ export const AboutUs = styled.div`
     background-size: cover;
     background-position: center center;
     .left{
-        background-image: url(${imgText});
+            @media(max-width: 700px){
+                display: none;
+            }
+            background-image: url(${imgText});
             width: 300px;
             height: 300px;
             background-size: cover;
@@ -180,14 +172,6 @@ export const AboutUs = styled.div`
     }
     .right{
         width: 500px;
-        p{
-            color: #fff;
-            font-size: 30px;
-            line-height: 65px;
-            font-family: 'Montserrat', sans-serif;
-            font-family: 'Roboto', sans-serif;
-            font-family: 'Ubuntu', sans-serif;
-        }
         button{
             color: #fff;
             border-color: transparent;
@@ -239,7 +223,373 @@ export const AboutUs = styled.div`
     }
 `
 
+export const AboutText = styled.p`
+    color: #fff;
+    font-size: 30px;
+    line-height: 65px;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
+    @media(max-width: 700px){
+        font-size: 25px;
+        line-height: 55px;
+    }
+    @media(max-width: 420px){
+        line-height: 40px;
+    }
+`
 
+export const Services = styled.div`
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    background-color: ${({theme}) => theme.blue};
+    overflow: hidden;
+    @media(max-width: 1000px){
+        min-height: 1530px;
+        
+    }
+    .cards{
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        padding-top: 15vh;
+        @media(max-width: 1000px){
+            flex-direction: column;
+        }
+    }
+`
 
+export const Card = styled.div`
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto:wght@700&family=Ubuntu:ital,wght@1,500&display=swap');
+
+    width: 267px;
+    height: 379px;
+    border: 1px solid transparent;
+    text-align: center;
+    color: #fff;
+    margin: 30px;
+    padding: 35px 5px 0;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,0.2);
+    position: relative;
+    transition: 0.4s;
+    @media(max-width: 1000px){
+        width: auto;
+    }
+    .last{
+        p{
+            padding-top: 43px;
+        }
+    }
+    :hover{
+        color: ${({theme}) => theme.yellow};
+        border-color: ${({theme}) => theme.yellow};
+    }
+    img{
+        width: 140px;
+        min-height: 90px;
+    }
+    p{
+        font-size: 18px;
+        font-family: 'Montserrat', sans-serif;
+        font-family: 'Roboto', sans-serif;
+        font-family: 'Ubuntu', sans-serif;
+        line-height: 26px;
+        padding-top: 20px;
+    }
+    a{
+        font-size: 17px;
+        padding-top: 55px;
+        font-family: sans-serif;
+        font-weight: 700;
+        position: absolute;
+        bottom: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+`
+
+export const AnimaBtn = styled.button`
+    color: #fff;
+    border-color: transparent;
+    border-left: 2px solid ${({theme}) => (theme.yellow)};
+    border-right: 2px solid ${({theme}) => (theme.yellow)};
+    text-transform: capitalize;
+    font-family: sans-serif;
+    padding: 10px 12px;
+    font-size: 19px;
+    font-weight: 600;
+    margin-top: 30px;
+    position: relative;
+    cursor: pointer;
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    :hover{
+        :after{
+            width: 52%;
+        }
+        :before{
+            width: 52%;
+        }
+    }
+    :after{
+        transition: width 0.4s;
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        height: 100%;
+        width: 6px;
+        border-top: 2px solid ${({theme}) => theme.yellow};
+        border-bottom: 2px solid ${({theme}) => theme.yellow};
+    }
+    :before{
+        transition: width 0.4s;
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        height: 100%;
+        width: 6px;
+        border-top: 2px solid ${({theme}) => theme.yellow};
+        border-bottom: 2px solid ${({theme}) => theme.yellow};
+    }
+    .fas{
+        padding-left: 10px;
+        font-size: 17px;
+    }
+` 
+
+export const Contact = styled.div`
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+`
+export const MapSection = styled.section`
+    width: 100%;
+    height: 100vh;
+    position: relative;
+`
+
+export const ContactBox = styled.div` 
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto:ital,wght@0,700;1,700&family=Ubuntu:ital,wght@1,500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Ubuntu:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+    display: flex;
+    align-items: center;
+    background-color: rgba(4,12,39, 0.9);
+    position: absolute;
+    bottom: 10%;
+    z-index: 6;
+    left: 5%;
+    @media(max-width: 440px){
+        left: 0;
+    }
+    .info{
+        padding: 30px;
+        max-width: 340px;
+        color: #fff;
+        @media(max-width: 440px){
+            padding: 15px;
+        }
+        h3{
+            font-family: sans-serif;
+            font-size: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-family: 'Roboto', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        p{
+            font-size: 15px;
+            padding-top: 35px;
+            font-family: 'Montserrat', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
+            line-height: 20px;
+        }
+        .location{
+            font-size: 21px;
+            font-family: 'Ubuntu', sans-serif;
+            padding-top: 25px;
+            line-height: 27px;
+            @media(max-width: 380px){
+                font-size: 18px;
+            }
+        }
+        .phone{
+            font-family: sans-serif;
+            font-size: 19px;
+            padding-top: 30px;
+        }
+        .social_medias{
+            padding-top: 35px;
+            display: flex;
+            align-items: center;
+            i{
+                transition: .3s;
+                padding: 15px 18px;
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                margin: 0 10px;
+                cursor: pointer;
+                font-size: 18px;
+                :hover{
+                    border-color: ${({theme}) => theme.yellow};
+                }
+            }
+        }
+        .footer{
+            padding-top: 20px;
+            font-family: sans-serif;
+            font-weight: 450;
+            padding-top: 15px;
+            font-size: 14px;
+        }
+    }
+    .message{
+        max-width: 340px;
+        padding: 30px;
+        @media(max-width: 850px){
+            display: none;
+        }
+        input[type='text']{
+            background: transparent;
+            border-color: transparent;
+            border-bottom: 1px solid #eee;
+            margin: 8px 0;
+            font-size: 16px;
+            font-family: "Montserrat", sans-serif;
+            padding: 13px 5px;
+            width: 100%;
+            color: #f3f3f3;
+            letter-spacing: 1.5px;
+            ::placeholder{
+                color: #f3f3f3;
+            }
+        }
+        .checkbox_group{
+            padding-top: 30px;
+            margin-bottom: 20px;
+            span{
+                display: block;
+                padding: 5px 0;
+            }
+        }
+    }
+`
+
+export const SendButton = styled.button`
+    color: #fff;
+    border-color: transparent;
+    border-left: 2px solid ${({theme}) => (theme.yellow)};
+    border-right: 2px solid ${({theme}) => (theme.yellow)};
+    text-transform: capitalize;
+    font-family: sans-serif;
+    padding: 10px 12px;
+    font-size: 19px;
+    font-weight: 600;
+    position: relative;
+    cursor: pointer;
+    :hover{
+        :after{
+            width: 52%;
+        }
+        :before{
+            width: 52%;
+        }
+    }
+    :after{
+        transition: width 0.4s;
+        content: '';
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        height: 100%;
+        width: 6px;
+        border-top: 2px solid ${({theme}) => theme.yellow};
+        border-bottom: 2px solid ${({theme}) => theme.yellow};
+    }
+    :before{
+        transition: width 0.4s;
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        height: 100%;
+        width: 6px;
+        border-top: 2px solid ${({theme}) => theme.yellow};
+        border-bottom: 2px solid ${({theme}) => theme.yellow};
+    }
+    .fas{
+        padding-left: 10px;
+        font-size: 17px;
+    }
+`
+
+export const AnimaCheckbox = styled.input` 
+    position: relative;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    -webkit-appearance: none;
+    outline: none;
+    :before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: .5s;
+        width: ${({checked}) => (checked ? '10px':'100%')};
+        height: 100%;
+        border: 1.5px solid ${({theme}) => theme.yellow};
+        border-left: ${({checked}) => (checked && 'none')};
+        border-top: ${({checked}) => (checked && 'none')};
+        transform: rotate(${({checked}) => (checked ? '45deg':'0')}) ;
+    }
+` 
+
+export const CheckboxLabel = styled.label`
+    font-size: 16px;
+    color: #fff;
+    font-family: sans-serif;
+    padding-left: 10px;
+    text-transform: capitalize;
+`
+
+export const Footer = styled.div` 
+    padding: 15px 0;
+    background-color: ${({theme}) => theme.blue};
+    display: none;
+    @media(max-width: 850px){
+        display: block;
+    }
+    .icons{
+        display: flex;
+        align-items: center;
+        @media(max-width: 570px){
+            display: none;
+        }
+        i{
+            transition: .3s;
+            padding: 15px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    }
+    .underTitle{
+        display: block;
+        text-align: center;
+        color: #fff;
+        padding-top: 10px;
+        font-size: 17px;
+    }
+`
 
 

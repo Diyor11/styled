@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { Modal } from '@material-ui/core'
 
 export const Nav = styled.nav`
     position: fixed;
     width: 100%;
-    height: ${({scrolled}) => (scrolled ? '56px': '88px')};
-    background-color: ${({scrolled}) => (scrolled ? '#fff':'transparent')};
+    height: ${({scrolled}) => (scrolled ? '56px':'88px')};
+    background-color: ${({scrolled}) => (scrolled && (window.location.pathname !== '/') ? '#fff':'transparent')};
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 20;
+    @media(max-width: 600px){
+        height: 56px
+    }
 `
 
 export const NavBrand = styled(NavLink)`
@@ -18,12 +22,17 @@ export const NavBrand = styled(NavLink)`
     h4{
         font-family: sans-serif;
         font-size: 35px;
-        letter-spacing: -14px;
+        letter-spacing: ${({scrolled}) => (scrolled ? '1px': '-14px')};
         color: ${({scrolled}) => (scrolled ? '#BC188F': '#fff')};
-        opacity: 0;
+        opacity: ${({scrolled}) => (scrolled ? 1 : 0)};
         transition: .6s ease-in;
     }
-
+    img{
+        display: ${({scrolled}) => ((scrolled && (window.location.pathname !== '/')) ? 'none' : 'flex')};
+        @media(max-width: 600px){
+            width: 40px;
+        }
+    }
     &:hover{
         h4{
             letter-spacing: 1px;
@@ -53,21 +62,27 @@ export const NavLinks = styled.ul`
     .phone{
         font-size: 15px;
         ${navLinkStyles}
+        color: ${({scrolled}) => (scrolled ? "#000": '#fff')};
         margin-top: ${({deckTop}) => (!deckTop && '25px')};
     }
     .leave-request{
-        border: 1px solid;
         font-size: 16px;
         padding: 7px 18px;
         border-radius: 18px;
         ${navLinkStyles}
+        color: ${({scrolled}) => (scrolled && '#fff')};
+        border: 1px solid ${({scrolled}) => (scrolled && '#0957FE')};
         margin: 0 5px;
         text-transform: uppercase;
         margin-top: ${({deckTop}) => (!deckTop && '25px')};
+        background-color: ${({scrolled}) => (scrolled ? '#0957FE':'transparent')};
     }
     li{
         margin-top: ${({deckTop}) => (!deckTop && '25px')};
         font-size: ${({deckTop}) => (!deckTop && '20px')};
+        a{
+            color: ${({scrolled}) => (scrolled ? "#000":'#fff')} !important;
+        }
         :hover{
             color: ${({theme}) => theme.yellow} !important;
             a{
@@ -97,6 +112,9 @@ export const Bars = styled.div`
         background-color: #fff;
         margin: 6px 0;
         transition: 0.4s;
+        @media(max-width: 1280px){
+            background-color: ${({scrolled, navOpen}) => (scrolled && !navOpen ? '#000':'#fff')};
+        }
     }
 
     .bar1 {
@@ -121,4 +139,29 @@ export const FullNav = styled.div`
     left: 0;
     background: rgba(0, 9, 31, 1);
     z-index: 10;
+`
+
+export const Order = styled.div`
+    width: 300px;
+    height: 500px;
+    background-color: #0A46C2;
+    position: fixed;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 12px;
+        height: 37px;
+        h3{
+            font-family: sans-serif;
+        }
+    }
+    .body{
+        height: 100%;
+        padding: 15px;
+    }
 `

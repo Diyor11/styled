@@ -3,6 +3,7 @@ import GlobalStyles from './globalStyles'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/home/Home'
 import { ThemeProvider } from 'styled-components'
+import Services from './pages/services/Services'
 
 const App = () => {
 
@@ -16,6 +17,7 @@ const App = () => {
             <GlobalStyles />
             <Routes>
                 <Route path='/' element={<Home />} />
+                <Route path='/services' element={<Services />} />
             </Routes>
         </ThemeProvider>
     )

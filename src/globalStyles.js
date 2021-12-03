@@ -1,13 +1,14 @@
 import { createGlobalStyle } from 'styled-components'
 import styled from 'styled-components'
 
+
 export default createGlobalStyle`
     *{
         padding: 0;
         margin: 0;
     }
-    ::-webkit-scrollbar{
-        display: none;
+    ::-webkit-scrollbar {
+        width: 0px;
     }
     a{
         color: unset;
@@ -29,7 +30,7 @@ export default createGlobalStyle`
 `
 
 export const Container = styled.div`
-    display: flex;
+    display: ${({d}) => d || 'flex'};
     align-items: center;
     height: ${({h}) => (h ? '100%': '')};
     justify-content: ${({jc}) => (jc ? jc:'')};
