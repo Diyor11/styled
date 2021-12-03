@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { Modal } from '@material-ui/core'
 
 export const Nav = styled.nav`
     position: fixed;
@@ -22,9 +21,9 @@ export const NavBrand = styled(NavLink)`
     h4{
         font-family: sans-serif;
         font-size: 35px;
-        letter-spacing: ${({scrolled}) => (scrolled ? '1px': '-14px')};
+        letter-spacing: ${({scrolled}) => (scrolled && (window.location.pathname !== '/') ? '1px': '-14px')};
         color: ${({scrolled}) => (scrolled ? '#BC188F': '#fff')};
-        opacity: ${({scrolled}) => (scrolled ? 1 : 0)};
+        opacity: ${({scrolled}) => (scrolled && (window.location.pathname !== '/') ? 1 : 0)};
         transition: .6s ease-in;
     }
     img{
@@ -113,7 +112,8 @@ export const Bars = styled.div`
         margin: 6px 0;
         transition: 0.4s;
         @media(max-width: 1280px){
-            background-color: ${({scrolled, navOpen}) => (scrolled && !navOpen ? '#000':'#fff')};
+            background-color: ${({navOpen}) => (!navOpen ? '#000':'#fff')};
+            background-color: ${({scrolled}) => (scrolled && (window.location.pathname !== '/') ? '#000':'#fff')};
         }
     }
 
@@ -142,13 +142,20 @@ export const FullNav = styled.div`
 `
 
 export const Order = styled.div`
-    width: 300px;
-    height: 500px;
+    width: 320px;
+    min-height: 500px;
     background-color: #0A46C2;
     position: fixed;
     top: 50vh;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media(max-width: 600px){
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        transform: translate(0);
+    }
     header{
         display: flex;
         justify-content: space-between;
@@ -163,5 +170,44 @@ export const Order = styled.div`
     .body{
         height: 100%;
         padding: 15px;
+        form{
+            input{
+                display: block;
+                width: 100%;
+                color: #fff;
+                border-color: transparent;
+                border-bottom: 1.2px solid #ddd;
+                font-size: 16px;
+                font-family: sans-serif;
+                padding: 4px;
+                margin: 9px 0;
+                background: transparent;
+                box-sizing: border-box;
+                outline: none;
+                ::placeholder{
+                    color: #fff;
+                }
+                :focus{
+                    border-bottom: 1.2px solid ${({theme}) => theme.yellow};
+                }
+            }
+        }
+        .query{
+            color: #fff;
+            font-size: 17px;
+            font-family: sans-serif;
+            padding-top: 15px;
+            font-weight: 400;
+        }
+    }
+`
+
+export const CheckboxGroup = styled.div` 
+    padding-top: 30px;
+    margin-bottom: 20px;
+    span{
+        display: block;
+        padding: 5px 0;
+        font-size: 15px;
     }
 `

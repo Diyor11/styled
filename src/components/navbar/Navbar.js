@@ -1,11 +1,23 @@
 import React, {useState} from 'react'
-import { Nav, NavBrand, NavLinks, NavLinkLi, Bars, FullNav, Order } from './navbar.elements'
+import { Nav, NavBrand, NavLinks, NavLinkLi, Bars, FullNav, Order, CheckboxGroup } from './navbar.elements'
 import { Container } from '../../globalStyles'
 import logoImg from '../../assets/colibri.png'
 import { NavLink } from 'react-router-dom'
 import { Modal } from '@material-ui/core'
 import { IconButton } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';
+import { AnimaCheckbox, CheckboxLabel } from '../../pages/home/home.elements'
+import { SendButton } from '../../pages/home/home.elements'
+
+const Checkbox = ({text, index}) => {
+    const [checked, setChecked] = useState(false)
+    return(
+        <span>
+            <AnimaCheckbox id={'checkbox' + index} type='checkbox' checked={checked} onChange={() => setChecked(prev => !prev)} />
+            <CheckboxLabel htmlFor={'checkbox' + index} >{text}</CheckboxLabel>
+        </span>
+    )
+}
 
 const Navbar = () => {
 
@@ -13,6 +25,7 @@ const Navbar = () => {
     let ww = window.innerWidth;
     const [scrolled, setScrolled] = useState(false)
     const [modal, setModal] = useState(false)
+    const [value, setValue] = useState('+998 ')
     
     window.addEventListener('resize', () => ww = window.innerWidth)
     const navItems = [
@@ -28,6 +41,13 @@ const Navbar = () => {
             name: 'КОНТАКТЫ',
             path: '/contact'
         }
+    ]
+    const checboxLabels = [
+        'создать сайт',
+        'создать мобильное приложение',
+        'создать телеграм бот',
+        'Поддержка и продвижение',
+        'другой'
     ]
 
     window.addEventListener('scroll', () => {
@@ -62,7 +82,7 @@ const Navbar = () => {
                                 <a href='tel:+9989773812310'>+998 97 738 23 10</a>
                             </li>
                         </NavLinks> : (
-                            <Bars scrolled={scrolled} navOpen={navOpen} open={navOpen} >
+                            <Bars scrolled={scrolled} onClick={() => setNavOpen(!navOpen)} navOpen={navOpen} open={navOpen} >
                                 <div className='bar1'></div>
                                 <div className='bar2'></div>
                                 <div className='bar3'></div>
@@ -94,24 +114,28 @@ const Navbar = () => {
         </Nav>
         <Modal
             open={modal}
+            onClose={() => setModal(false)}
         >
             <Order>
                 <header>
                     <h3>Оставьте заявку</h3>
-                    <IconButton onClick={() => setModal(false)} >
+                    <IconButton onClick={() => setModal(false)}>
                         <CloseIcon />
                     </IconButton>
                 </header>
                 <div className='body'>
                     <form onSubmit={(e) => e.preventDefault()}>
-                        <input type='text' />
-                        <input type='text' />
+                        <input type='text' placeholder='Как к вам обращаться?' />
+                        <input type='text' placeholder='+998 ' value={value} onChange={({target}) => setValue(target.value)}  />
                     </form>
                     <h4 className='query'>Что вас интересует?</h4>
-                    <div className='icons'>
-                        <i className="fab fa-facebook-f"></i>
-                        <i className="fab fa-telegram-plane"></i>
-                        <i className="fab fa-instagram"></i>
+                    <CheckboxGroup>
+                        {
+                            checboxLabels.map((item, index) => <Checkbox key={index} index={index} text={item} />)
+                        }
+                    </CheckboxGroup>
+                    <div style={{width: 'fit-content', margin: '0 auto'}}>
+                        <SendButton>Отправить <i className="fas fa-angle-double-right"></i></SendButton>
                     </div>
                 </div>
             </Order>

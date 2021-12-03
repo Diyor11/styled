@@ -16,7 +16,10 @@ export const MainText = styled.div`
         color: rgba(26,34,54,255);
         h1{
             font-size: 110px;
-            transform: translateY(50%)
+            transform: translateY(50%);
+            @media(max-width: 600px){
+                font-size: 70px;
+            }
         }
     }
     .hero_content{
@@ -24,7 +27,10 @@ export const MainText = styled.div`
         h1{
             text-align: center;
             font-size: 50px;
-            transform: translateY(-40%)
+            transform: translateY(-40%);
+            @media(max-width: 600px){
+                font-size: 30px;
+            }
         }
     }
 `
@@ -58,8 +64,15 @@ export const HeroTextBox = styled.div`
 export const CardsWrapper = styled.div` 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    padding: 30px 0;
+    padding: 30px 0; 
     grid-gap: 20px;
+    box-sizing: border-box;
+    @media(max-width: 600px){
+        grid-template-columns: 1fr;
+    }
+    @media(max-width: 500px){
+        display: none;
+    }
 `
 
 export const Card = styled.div` 
@@ -72,10 +85,10 @@ export const Card = styled.div`
     cursor: pointer;
     :hover{
         .front{
-            transform: perspective(500px) rotateY(180deg); 
+            transform: perspective(600px) rotateY(180deg); 
         }
         .back{
-            transform: perspective(500px) rotateY(360deg); 
+            transform: perspective(600px) rotateY(360deg); 
         }
     }
     .face{
@@ -87,13 +100,13 @@ export const Card = styled.div`
         transform-style: preserve-3d;
         backface-visibility: hidden;
         transition: 1.3s ease-in-out;
-        transform: perspective(500px) rotateY(0deg); 
+        transform: perspective(600px) rotateY(0deg); 
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 10px;
         .text{
-            transform: perspective(500px) translateZ(50px); 
+            transform: perspective(600px) translateZ(50px); 
             font-family: 'Open-sans', sans-serif;
             color: #fff;
             text-align: center;
@@ -122,7 +135,7 @@ export const Card = styled.div`
     }
     .back{
         background: ${({theme}) => theme.blue};
-        transform: perspective(500px) rotateY(180deg); 
+        transform: perspective(600px) rotateY(180deg); 
     }
 `
 

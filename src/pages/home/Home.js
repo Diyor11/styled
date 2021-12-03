@@ -47,7 +47,7 @@ const checboxLabels = [
     'другой'
 ]
 
-const MarkerMap = () => 
+export const MarkerMap = () => 
     <>
         <Pin />
         <Pulse />
